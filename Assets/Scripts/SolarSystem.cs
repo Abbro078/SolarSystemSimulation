@@ -5,9 +5,30 @@ using UnityEngine;
 public class SolarSystem : MonoBehaviour
 {
     [SerializeField] private float universeGravity = 100f;
+    
+    // Atmospheric constants
+    [SerializeField] private float seaLevelDensity = 1.225f; // kg/m^3 at sea level
+    [SerializeField] private float scaleHeight = 8400f; // Scale height in meters (for exponential decay)
+    
 
     private GameObject[] _celestialBodies;
     private Rigidbody[] _celestialRigidbodies;
+    
+
+    // Update the radii to match your celestial body sizes
+    private Dictionary<string, float> radii = new Dictionary<string, float>()
+    {
+        {"Sun", 696.340f},
+        {"Mercury", 2.440f},
+        {"Venus", 6.052f},
+        {"Earth", 6.371f},
+        {"Mars", 3.390f},
+        {"Jupiter", 69.911f},
+        {"Saturn", 58.232f},
+        {"Uranus", 25.362f},
+        {"Neptune", 24.622f},
+        {"Moon", 1.7f}
+    };
 
     private Dictionary<string, float> rotationalPeriods = new Dictionary<string, float>()
     {
@@ -58,11 +79,45 @@ public class SolarSystem : MonoBehaviour
 
                 Vector3 direction = positionB - positionA;
                 float distance = direction.magnitude;
-                Vector3 force = direction.normalized * (universeGravity * (massA * massB) / (distance * distance));
+
+                float gravitationalForce = CalculateGravitationalForce(distance, massA, massB, bodyA.gameObject.name, bodyB.gameObject.name);
+                Vector3 force = direction.normalized * gravitationalForce;
 
                 bodyA.AddForce(force);
                 bodyB.AddForce(-force); // Applying Newton's third law
             }
+        }
+    }
+
+    float CalculateGravitationalForce(float distance, float massA, float massB, string nameA, string nameB)
+    {
+        float radiusA = radii.ContainsKey(nameA) ? radii[nameA] : 0f;
+        float radiusB = radii.ContainsKey(nameB) ? radii[nameB] : 0f;
+
+        float effectiveDistance = Mathf.Max(distance, 0.1f); // Avoid division by zero
+
+        float gravityFactorA = radiusA > 0 ? Mathf.Clamp01(effectiveDistance / radiusA) : 1f;
+        float gravityFactorB = radiusB > 0 ? Mathf.Clamp01(effectiveDistance / radiusB) : 1f;
+
+        // Calculate atmospheric density effect
+        float altitudeA = Mathf.Max(0, effectiveDistance - radiusA);
+        float atmosphericDensityA = seaLevelDensity * Mathf.Exp(-altitudeA / scaleHeight);
+
+        float altitudeB = Mathf.Max(0, effectiveDistance - radiusB);
+        float atmosphericDensityB = seaLevelDensity * Mathf.Exp(-altitudeB / scaleHeight);
+
+        // Apply density adjustment to the gravitational force
+        float densityFactorA = 1f + (0.1f * atmosphericDensityA); // Adjust as needed
+        float densityFactorB = 1f + (0.1f * atmosphericDensityB); // Adjust as needed
+
+        if (effectiveDistance <= radiusA || effectiveDistance <= radiusB)
+        {
+            // Gravity decreases as we move from the center to the surface
+            return universeGravity * (massA * massB) / (effectiveDistance * effectiveDistance) * gravityFactorA * gravityFactorB * densityFactorA * densityFactorB;
+        }
+        else
+        {
+            return universeGravity * (massA * massB) / (effectiveDistance * effectiveDistance) * densityFactorA * densityFactorB;
         }
     }
 
