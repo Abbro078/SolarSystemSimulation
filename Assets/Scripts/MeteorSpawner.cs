@@ -2,12 +2,13 @@ using UnityEngine;
 
 public class MeteorShooter : MonoBehaviour
 {
-    public GameObject meteorPrefab;
+    public GameObject[] meteorPrefabs; // Array of meteor prefabs
     public float shootingSpeed = 200f;
     public float meteorLifetime = 20f;
     public float maxShootDistance = 1000f; // Maximum distance to check for planets
 
     private Camera mainCamera;
+    private System.Random random = new System.Random();
 
     void Start()
     {
@@ -33,7 +34,7 @@ public class MeteorShooter : MonoBehaviour
             if (hit.collider.CompareTag("Celestial"))
             {
                 GameObject targetPlanet = hit.collider.gameObject;
-                LaunchMeteorAtTarget(targetPlanet);
+                LaunchHomingMeteor(targetPlanet);
             }
             else
             {
@@ -48,36 +49,30 @@ public class MeteorShooter : MonoBehaviour
         }
     }
 
-    void LaunchMeteorAtTarget(GameObject target)
+    void LaunchHomingMeteor(GameObject target)
     {
-        GameObject meteor = Instantiate(meteorPrefab, transform.position, Quaternion.identity);
-        Rigidbody meteorRb = meteor.GetComponent<Rigidbody>();
+        GameObject meteor = Instantiate(GetRandomMeteorPrefab(), transform.position, Quaternion.identity);
+        HomingMeteor homingMeteor = meteor.AddComponent<HomingMeteor>();
 
-        if (meteorRb != null)
+        if (homingMeteor != null)
         {
-            Vector3 targetPosition = PredictTargetPosition(target, meteor.transform.position);
-            Vector3 shootDirection = (targetPosition - meteor.transform.position).normalized;
-
-            meteorRb.AddForce(shootDirection * shootingSpeed, ForceMode.Impulse);
-            meteorRb.useGravity = false;
-
-            Destroy(meteor, meteorLifetime);
+            homingMeteor.Initialize(target, shootingSpeed, meteorLifetime);
         }
         else
         {
-            Debug.LogError("Meteor prefab must have a Rigidbody component!");
+            Debug.LogError("Failed to add HomingMeteor component to the meteor!");
         }
     }
 
     void LaunchMeteorInDirection(Vector3 direction)
     {
-        GameObject meteor = Instantiate(meteorPrefab, transform.position, Quaternion.identity);
+        GameObject meteor = Instantiate(GetRandomMeteorPrefab(), transform.position, Quaternion.identity);
         Rigidbody meteorRb = meteor.GetComponent<Rigidbody>();
 
         if (meteorRb != null)
         {
             meteorRb.AddForce(direction * shootingSpeed, ForceMode.Impulse);
-            meteorRb.useGravity = true;
+            meteorRb.useGravity = false; // Use gravity if needed, but for space, it's typically false
 
             Destroy(meteor, meteorLifetime);
         }
@@ -87,14 +82,9 @@ public class MeteorShooter : MonoBehaviour
         }
     }
 
-    Vector3 PredictTargetPosition(GameObject target, Vector3 shooterPosition)
+    GameObject GetRandomMeteorPrefab()
     {
-        Rigidbody targetRb = target.GetComponent<Rigidbody>();
-        if (targetRb == null) return target.transform.position;
-
-        float distance = Vector3.Distance(shooterPosition, target.transform.position);
-        float timeToTarget = distance / shootingSpeed;
-
-        return target.transform.position + (targetRb.velocity * timeToTarget);
+        int index = random.Next(meteorPrefabs.Length);
+        return meteorPrefabs[index];
     }
 }

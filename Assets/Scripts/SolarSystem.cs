@@ -34,14 +34,40 @@ public class SolarSystem : MonoBehaviour
     {
         {"Sun", 25.0f * 24 * 60 * 60}, // Example: Sun rotates once every 25 days
         {"Mercury", 58.6f * 24 * 60 * 60}, // Mercury rotates once every 58.6 days
-        {"Venus", 243.0f * 24 * 60 * 60}, // Venus rotates once every 243 days
+        {"Venus", -243.0f * 24 * 60 * 60}, // Venus rotates once every 243 days
         {"Earth", 24.0f * 60 * 60}, // Earth rotates once every 24 hours
         {"Mars", 24.6f * 60 * 60}, // Mars rotates once every 24.6 hours
         {"Jupiter", 9.9f * 60 * 60}, // Jupiter rotates once every 9.9 hours
         {"Saturn", 10.7f * 60 * 60}, // Saturn rotates once every 10.7 hours
-        {"Uranus", 17.2f * 60 * 60}, // Uranus rotates once every 17.2 hours
+        {"Uranus", -17.2f * 60 * 60}, // Uranus rotates once every 17.2 hours
         {"Neptune", 16.1f * 60 * 60}, // Neptune rotates once every 16.1 hours
         {"Moon", 27.3f * 24 * 60 * 60} // Moon rotates once every 27.3 days (synchronous rotation with Earth)
+    };
+    
+    private Dictionary<string, float> semiMajorAxes = new Dictionary<string, float>()
+    {
+        {"Mercury", 638.0f}, // Example semi-major axis
+        {"Venus", 1076.0f},
+        {"Earth", 1510.0f},
+        {"Mars", 2488.0f},
+        {"Jupiter", 7559.0f},
+        {"Saturn", 14878.0f},
+        {"Uranus", 29546.0f},
+        {"Neptune", 44755.0f},
+        {"Moon", 1522.05f}
+    };
+
+    private Dictionary<string, float> planetaryMasses = new Dictionary<string, float>()
+    {
+        {"Mercury", 0.055f},
+        {"Venus", 0.815f},
+        {"Earth", 15.0f},
+        {"Mars", 0.107f},
+        {"Jupiter", 317.8f},
+        {"Saturn", 95.16f},
+        {"Uranus", 14.54f},
+        {"Neptune", 17.15f},
+        {"Moon", 0.01f}
     };
 
     void Start()
@@ -144,19 +170,53 @@ public class SolarSystem : MonoBehaviour
             }
         }
     }
+    
+    
+    // private void CalculateAndApplyRotation()
+    // {
+    //     foreach (var kvp in semiMajorAxes)
+    //     {
+    //         string planet = kvp.Key;
+    //         float semiMajorAxis = kvp.Value;
+    //         float mass = planetaryMasses[planet];
+    //
+    //         // Calculate the rotational period
+    //         float period = 2 * Mathf.PI * Mathf.Sqrt(Mathf.Pow(semiMajorAxis, 3) / (100000000f * mass));
+    //
+    //         Debug.Log($"{planet} has a rotational period of {period} seconds.");
+    //
+    //         // Apply the rotational period to your celestial objects
+    //         ApplyRotation(planet, period);
+    //     }
+    // }
+    //
+    // private void ApplyRotation(string planetName, float period)
+    // {
+    //     float rotationSpeed = 2 * Mathf.PI / period;
+    //
+    //     foreach (Rigidbody body in _celestialRigidbodies)
+    //     {
+    //         if (body.gameObject.name == planetName)
+    //         {
+    //             body.angularVelocity = Vector3.up * rotationSpeed;
+    //             break;
+    //         }
+    //     }
+    // }
 
+    // You need to define _celestialRigidbodies somewhere in your class
     void ApplySelfRotation()
     {
         for (int i = 0; i < _celestialRigidbodies.Length; i++)
         {
             Rigidbody body = _celestialRigidbodies[i];
             string bodyName = body.gameObject.name;
-
+    
             if (rotationalPeriods.ContainsKey(bodyName))
             {
                 float rotationPeriod = rotationalPeriods[bodyName];
                 float rotationSpeed = 2 * Mathf.PI / rotationPeriod; // radians per second
-
+    
                 // Apply angular velocity for self-rotation around the up axis (y-axis)
                 body.angularVelocity = Vector3.up * rotationSpeed;
             }
