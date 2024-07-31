@@ -42,12 +42,15 @@ public class CameraFreeLook : MonoBehaviour
 
     [SerializeField] private KeyCode anchoredRotateKey = KeyCode.Mouse1;
 
+    private MeteorShooter MeteorShooting;
+
     private Transform focusedObject; // Reference to the focused object
     private Vector3 focusOffset; // Offset from the focused object
 
     private void Start()
     {
         SavePosAndRot();
+        MeteorShooting = gameObject.GetComponent<MeteorShooter>();
     }
 
     void Update()
@@ -130,6 +133,12 @@ public class CameraFreeLook : MonoBehaviour
 
             transform.position = targetPos + focusOffset;
             transform.LookAt(focusedObject);
+
+            if (Input.GetKeyDown(KeyCode.P)) 
+            {   
+                MeteorShooting.enabled = !MeteorShooting.enabled;
+            }
+
         }
     }
 
@@ -169,6 +178,10 @@ public class CameraFreeLook : MonoBehaviour
         transform.position = prevPos;
         transform.rotation = prevRot;
         focusedObject = null; // Stop following the focused object
+        if (MeteorShooting.enabled)
+        {
+            MeteorShooting.enabled = !MeteorShooting.enabled;
+        } 
     }
 
     private Vector3 GetOffset(Vector3 targetPos, Vector3 targetSize)

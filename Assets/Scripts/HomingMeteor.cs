@@ -50,10 +50,13 @@ public class HomingMeteor : MonoBehaviour
             {
                 // Calculate the position and rotation for the hit effect
                 Vector3 collisionPoint = collision.contacts[0].point;
-                Quaternion hitEffectRotation = Quaternion.LookRotation(collisionPoint - transform.position);
+                Quaternion hitEffectRotation = Quaternion.LookRotation(collision.contacts[0].normal);
 
                 // Instantiate the hit effect at the collision point and parent it to the celestial body
                 GameObject hitEffect = Instantiate(hitEffectPrefab, collisionPoint, hitEffectRotation, collision.transform);
+
+                // Destroy the hit effect after 3 seconds
+                Destroy(hitEffect, 1.5f);
             }
 
             // Destroy the meteor
