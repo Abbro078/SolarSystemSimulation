@@ -1,26 +1,38 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class LightController : MonoBehaviour
 {
-    public Light pointLight; // The point light source
-    public float maxIntensity = 1.0f; // Maximum intensity at the light source
-    public float maxDistance = 10.0f; // Maximum distance where the light is still effective
+    [SerializeField] private Light pointLight; 
+    [SerializeField] private float maxIntensity = 1.0f; 
+    [SerializeField] private float maxDistance = 10.0f; 
 
-    void Update()
+    private List<Renderer> _renderers = new List<Renderer>();
+
+    private void Start()
     {
-        // Iterate through all objects in the scene that should be affected by the light
-        foreach (var obj in FindObjectsOfType<Renderer>())
-        {
-            // Calculate the distance from the light source to the object
-            float distance = Vector3.Distance(pointLight.transform.position, obj.transform.position);
+        _renderers.AddRange(FindObjectsOfType<Renderer>());
+    }
 
-            // Calculate the intensity based on the distance
+    private void Update()
+    {
+        UpdateLightIntensity();
+    }
+
+    private void UpdateLightIntensity()
+    {
+        foreach (var renderer in _renderers)
+        {
+            float distance = Vector3.Distance(pointLight.transform.position, renderer.transform.position);
+
             float intensity = Mathf.Clamp01(1 - (distance / maxDistance)) * maxIntensity;
 
-            // Apply the intensity to the object's material
-            // obj.material.SetFloat("_LightIntensity", intensity);
+            
+            Light light = renderer.GetComponent<Light>();
+            if (light != null)
+            {
+                light.intensity = intensity;
+            }
         }
     }
 }

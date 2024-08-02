@@ -9,6 +9,7 @@ public class CameraFreeLook : MonoBehaviour
     [SerializeField] private float minFocusDistance = 5.0f;
     private float doubleClickTime = .15f;
     private float cooldown = 0;
+    
     [Header("Undo - Only undoes the Focus Object - The keys must be pressed in order.")]
     [SerializeField] private KeyCode firstUndoKey = KeyCode.LeftControl;
     [SerializeField] private KeyCode secondUndoKey = KeyCode.Z;
@@ -18,7 +19,6 @@ public class CameraFreeLook : MonoBehaviour
     [SerializeField] private float rotationSpeed = 10.0f;
     [SerializeField] private float zoomSpeed = 10.0f;
 
-    // Cache last pos and rot to be able to undo last focus object action.
     Quaternion prevRot = new Quaternion();
     Vector3 prevPos = new Vector3();
     private float prevMoveSpeed;
@@ -44,8 +44,8 @@ public class CameraFreeLook : MonoBehaviour
 
     private MeteorShooter MeteorShooting;
 
-    private Transform focusedObject; // Reference to the focused object
-    private Vector3 focusOffset; // Offset from the focused object
+    private Transform focusedObject; 
+    private Vector3 focusOffset;
 
     private void Start()
     {
@@ -58,13 +58,11 @@ public class CameraFreeLook : MonoBehaviour
         if (!doFocus)
             return;
 
-        // Double click for focus 
         if (cooldown > 0 && Input.GetKeyDown(KeyCode.Mouse0))
             FocusObject();
         if (Input.GetKeyDown(KeyCode.Mouse0))
             cooldown = doubleClickTime;
 
-        // --------UNDO FOCUS---------
         if (Input.GetKey(firstUndoKey)) 
         {
             if (Input.GetKeyDown(secondUndoKey))
@@ -78,7 +76,6 @@ public class CameraFreeLook : MonoBehaviour
     {
         Vector3 move = Vector3.zero;
         
-        // Move and rotate the camera
         if (Input.GetKey(forwardKey))
             move += Vector3.forward * moveSpeed;
         if (Input.GetKey(backKey))
@@ -88,7 +85,6 @@ public class CameraFreeLook : MonoBehaviour
         if (Input.GetKey(rightKey))
             move += Vector3.right * moveSpeed;
 
-        // By far the simplest solution I could come up with for moving only on the Horizontal plane - no rotation, just cache y
         if (Input.GetKey(flatMoveKey))
         {
             float origY = transform.position.y;
@@ -100,14 +96,12 @@ public class CameraFreeLook : MonoBehaviour
         float mouseMoveY = Input.GetAxis(mouseY);
         float mouseMoveX = Input.GetAxis(mouseX);
 
-        // Move the camera when anchored
         if (Input.GetKey(anchoredMoveKey)) 
         {
             move += Vector3.up * mouseMoveY * -moveSpeed;
             move += Vector3.right * mouseMoveX * -moveSpeed;
         }
 
-        // Rotate the camera when anchored
         if (Input.GetKey(anchoredRotateKey)) 
         {
             transform.RotateAround(transform.position, transform.right, mouseMoveY * -rotationSpeed);
@@ -116,11 +110,9 @@ public class CameraFreeLook : MonoBehaviour
 
         transform.Translate(move);
 
-        // Scroll to zoom
         float mouseScroll = Input.GetAxis(zoomAxis);
         transform.Translate(Vector3.forward * mouseScroll * zoomSpeed);
 
-        // If there is a focused object, update the camera position to follow it and allow rotation around it
         if (focusedObject != null)
         {
             Vector3 targetPos = focusedObject.position;
@@ -144,10 +136,8 @@ public class CameraFreeLook : MonoBehaviour
 
     public void FocusObject()
     {
-        // To be able to undo
         SavePosAndRot();
 
-        // If we double-clicked an object in the scene, go to its position
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
@@ -163,7 +153,6 @@ public class CameraFreeLook : MonoBehaviour
                 transform.position = targetPos + focusOffset;
                 transform.LookAt(target.transform);
 
-                // Set the focused object to follow
                 focusedObject = target.transform;
             }
         }
@@ -179,7 +168,7 @@ public class CameraFreeLook : MonoBehaviour
     {
         transform.position = prevPos;
         transform.rotation = prevRot;
-        focusedObject = null; // Stop following the focused object
+        focusedObject = null; 
         if (MeteorShooting.enabled)
         {
             MeteorShooting.enabled = !MeteorShooting.enabled;
@@ -199,7 +188,6 @@ public class CameraFreeLook : MonoBehaviour
     
     public void FocusObject(GameObject target)
     {
-        // To be able to undo
         SavePosAndRot();
 
         if (target != null)
@@ -211,7 +199,6 @@ public class CameraFreeLook : MonoBehaviour
             transform.position = targetPos + focusOffset;
             transform.LookAt(target.transform);
 
-            // Set the focused object to follow
             focusedObject = target.transform;
         }
     }

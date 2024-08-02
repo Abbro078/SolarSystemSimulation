@@ -136,7 +136,6 @@ GameObject:
   - component: {fileID: 33709728}
   - component: {fileID: 33709727}
   - component: {fileID: 33709731}
-  - component: {fileID: 33709732}
   m_Layer: 0
   m_Name: Sun
   m_TagString: Celestial
@@ -258,20 +257,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &33709732
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 33709726}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 950a25531c1fd6d42a71ef2fe01527a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  radius: 109.2
-  atmosphereDensity: 0
 --- !u!1 &73640441
 GameObject:
   m_ObjectHideFlags: 0
@@ -418,9 +403,7 @@ GameObject:
   - component: {fileID: 123405263}
   - component: {fileID: 123405262}
   - component: {fileID: 123405261}
-  - component: {fileID: 123405265}
   - component: {fileID: 123405266}
-  - component: {fileID: 123405267}
   - component: {fileID: 123405268}
   - component: {fileID: 123405269}
   m_Layer: 0
@@ -517,23 +500,6 @@ Transform:
   - {fileID: 1568622396}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &123405265
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 123405260}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d23dc75a07979bc46bbfde1ce7ed3e05, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  orbitCenter: {fileID: 33709730}
-  orbitSpeed: 0.006
-  rotationSpeed: 22.4
-  orbitRadius: 0
-  angle: 0
 --- !u!54 &123405266
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -561,20 +527,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &123405267
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 123405260}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 950a25531c1fd6d42a71ef2fe01527a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  radius: 3.88
-  atmosphereDensity: 0
 --- !u!114 &123405268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -712,10 +664,8 @@ GameObject:
   - component: {fileID: 175579956}
   - component: {fileID: 175579955}
   - component: {fileID: 175579954}
-  - component: {fileID: 175579958}
   - component: {fileID: 175579959}
   - component: {fileID: 175579961}
-  - component: {fileID: 175579960}
   - component: {fileID: 175579962}
   - component: {fileID: 175579963}
   m_Layer: 0
@@ -812,23 +762,6 @@ Transform:
   - {fileID: 1347731922}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &175579958
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 175579953}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d23dc75a07979bc46bbfde1ce7ed3e05, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  orbitCenter: {fileID: 33709730}
-  orbitSpeed: 0.033
-  rotationSpeed: 33.33
-  orbitRadius: 0
-  angle: 0
 --- !u!54 &175579959
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -856,20 +789,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &175579960
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 175579953}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 950a25531c1fd6d42a71ef2fe01527a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  radius: 9.45
-  atmosphereDensity: 0
 --- !u!114 &175579961
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1032,9 +951,7 @@ GameObject:
   - component: {fileID: 211531489}
   - component: {fileID: 211531488}
   - component: {fileID: 211531487}
-  - component: {fileID: 211531491}
   - component: {fileID: 211531492}
-  - component: {fileID: 211531493}
   - component: {fileID: 211531494}
   - component: {fileID: 211531495}
   m_Layer: 0
@@ -1131,23 +1048,6 @@ Transform:
   - {fileID: 1875731651}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &211531491
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 211531486}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d23dc75a07979bc46bbfde1ce7ed3e05, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  orbitCenter: {fileID: 33709730}
-  orbitSpeed: 1.6
-  rotationSpeed: 0.06
-  orbitRadius: 0
-  angle: 0
 --- !u!54 &211531492
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1175,20 +1075,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &211531493
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 211531486}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 950a25531c1fd6d42a71ef2fe01527a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  radius: 0.9499999
-  atmosphereDensity: 90
 --- !u!114 &211531494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1326,9 +1212,7 @@ GameObject:
   - component: {fileID: 227194093}
   - component: {fileID: 227194092}
   - component: {fileID: 227194091}
-  - component: {fileID: 227194095}
   - component: {fileID: 227194096}
-  - component: {fileID: 227194097}
   - component: {fileID: 227194098}
   - component: {fileID: 227194099}
   m_Layer: 0
@@ -1425,23 +1309,6 @@ Transform:
   - {fileID: 1653721804}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &227194095
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 227194090}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d23dc75a07979bc46bbfde1ce7ed3e05, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  orbitCenter: {fileID: 33709730}
-  orbitSpeed: 0.012
-  rotationSpeed: 20.83
-  orbitRadius: 0
-  angle: 0
 --- !u!54 &227194096
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1469,20 +1336,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &227194097
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 227194090}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 950a25531c1fd6d42a71ef2fe01527a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  radius: 4.01
-  atmosphereDensity: 0
 --- !u!114 &227194098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2135,9 +1988,7 @@ GameObject:
   - component: {fileID: 942248177}
   - component: {fileID: 942248176}
   - component: {fileID: 942248175}
-  - component: {fileID: 942248179}
   - component: {fileID: 942248180}
-  - component: {fileID: 942248181}
   - component: {fileID: 942248182}
   - component: {fileID: 942248183}
   m_Layer: 0
@@ -2234,23 +2085,6 @@ Transform:
   - {fileID: 1880376542}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &942248179
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 942248174}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d23dc75a07979bc46bbfde1ce7ed3e05, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  orbitCenter: {fileID: 33709730}
-  orbitSpeed: 0.083
-  rotationSpeed: 36.6
-  orbitRadius: 0
-  angle: 0
 --- !u!54 &942248180
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2278,20 +2112,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &942248181
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 942248174}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 950a25531c1fd6d42a71ef2fe01527a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  radius: 11.21
-  atmosphereDensity: 0
 --- !u!114 &942248182
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2428,7 +2248,6 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
-  - component: {fileID: 963194229}
   - component: {fileID: 963194230}
   - component: {fileID: 963194231}
   - component: {fileID: 963194232}
@@ -2514,21 +2333,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 36.447, y: -64.84, z: 0}
---- !u!114 &963194229
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963194225}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a434af2ae60c564793c124913bdf5a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 123405264}
-  offset: {x: 80.67, y: 15.99, z: 0}
-  smoothSpeed: 5
 --- !u!45 &963194230
 Skybox:
   m_ObjectHideFlags: 0
@@ -2799,10 +2603,8 @@ GameObject:
   - component: {fileID: 1069966527}
   - component: {fileID: 1069966526}
   - component: {fileID: 1069966525}
-  - component: {fileID: 1069966529}
   - component: {fileID: 1069966530}
   - component: {fileID: 1069966531}
-  - component: {fileID: 1069966532}
   - component: {fileID: 1069966533}
   m_Layer: 0
   m_Name: Earth
@@ -2899,23 +2701,6 @@ Transform:
   - {fileID: 2083962738}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1069966529
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1069966524}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d23dc75a07979bc46bbfde1ce7ed3e05, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  orbitCenter: {fileID: 33709730}
-  orbitSpeed: 0.99
-  rotationSpeed: 15
-  orbitRadius: 0
-  angle: 0
 --- !u!54 &1069966530
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3056,20 +2841,6 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
---- !u!114 &1069966532
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1069966524}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 950a25531c1fd6d42a71ef2fe01527a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  radius: 1
-  atmosphereDensity: 1
 --- !u!114 &1069966533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4140,9 +3911,7 @@ GameObject:
   - component: {fileID: 1739829575}
   - component: {fileID: 1739829574}
   - component: {fileID: 1739829573}
-  - component: {fileID: 1739829577}
   - component: {fileID: 1739829578}
-  - component: {fileID: 1739829579}
   - component: {fileID: 1739829580}
   - component: {fileID: 1739829581}
   m_Layer: 0
@@ -4239,23 +4008,6 @@ Transform:
   - {fileID: 1499906980}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1739829577
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1739829572}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d23dc75a07979bc46bbfde1ce7ed3e05, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  orbitCenter: {fileID: 33709730}
-  orbitSpeed: 0.52
-  rotationSpeed: 14.6
-  orbitRadius: 0
-  angle: 0
 --- !u!54 &1739829578
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4283,20 +4035,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1739829579
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1739829572}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 950a25531c1fd6d42a71ef2fe01527a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  radius: 0.53
-  atmosphereDensity: 0.01
 --- !u!114 &1739829580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4794,10 +4532,8 @@ GameObject:
   - component: {fileID: 2017585479}
   - component: {fileID: 2017585478}
   - component: {fileID: 2017585477}
-  - component: {fileID: 2017585476}
   - component: {fileID: 2017585482}
   - component: {fileID: 2017585481}
-  - component: {fileID: 2017585483}
   - component: {fileID: 2017585484}
   m_Layer: 0
   m_Name: Mercury
@@ -4806,23 +4542,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2017585476
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2017585475}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d23dc75a07979bc46bbfde1ce7ed3e05, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  orbitCenter: {fileID: 33709730}
-  orbitSpeed: 4.09
-  rotationSpeed: 0.255
-  orbitRadius: 0
-  angle: 0
 --- !u!135 &2017585477
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -5050,20 +4769,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2017585483
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2017585475}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 950a25531c1fd6d42a71ef2fe01527a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  radius: 0.3899999
-  atmosphereDensity: 0
 --- !u!114 &2017585484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5190,10 +4895,8 @@ GameObject:
   - component: {fileID: 2083962742}
   - component: {fileID: 2083962741}
   - component: {fileID: 2083962740}
-  - component: {fileID: 2083962739}
   - component: {fileID: 2083962743}
   - component: {fileID: 2083962744}
-  - component: {fileID: 2083962745}
   m_Layer: 0
   m_Name: Moon
   m_TagString: Celestial
@@ -5216,23 +4919,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1069966528}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2083962739
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2083962737}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d23dc75a07979bc46bbfde1ce7ed3e05, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  orbitCenter: {fileID: 1069966528}
-  orbitSpeed: 13.19
-  rotationSpeed: 0.55
-  orbitRadius: 0
-  angle: 0
 --- !u!135 &2083962740
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -5444,20 +5130,6 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
---- !u!114 &2083962745
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2083962737}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 950a25531c1fd6d42a71ef2fe01527a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  radius: 0.273
-  atmosphereDensity: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

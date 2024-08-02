@@ -4,16 +4,11 @@ using UnityEngine;
 
 public class BeltObject : MonoBehaviour
 {
-    [SerializeField]
-    private float orbitSpeed;
-    [SerializeField]
-    private GameObject parent;
-    [SerializeField]
-    private bool rotationClockwise;
-    [SerializeField]
-    private float rotationSpeed;
-    [SerializeField]
-    private Vector3 rotationDirection;
+    [SerializeField] private float orbitSpeed;
+    [SerializeField] private GameObject parent;
+    [SerializeField] private bool rotationClockwise;
+    [SerializeField] private float rotationSpeed;
+    [SerializeField] private Vector3 rotationDirection;
 
     public void SetupBeltObject(float _speed, float _rotationSpeed, GameObject _parent, bool _rotateClockwise)
     {

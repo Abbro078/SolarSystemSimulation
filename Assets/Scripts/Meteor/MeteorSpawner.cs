@@ -2,20 +2,24 @@ using UnityEngine;
 
 public class MeteorShooter : MonoBehaviour
 {
-    public GameObject[] meteorPrefabs; // Array of meteor prefabs
-    public float shootingSpeed = 200f;
-    public float meteorLifetime = 20f;
-    public float maxShootDistance = 1000f; // Maximum distance to check for planets
+    [SerializeField] private GameObject[] meteorPrefabs; // Array of meteor prefabs
+    [SerializeField] private float shootingSpeed = 200f;
+    [SerializeField] private float meteorLifetime = 20f;
+    [SerializeField] private float maxShootDistance = 1000f; // Maximum distance to check for planets
 
-    private Camera mainCamera;
-    private System.Random random = new System.Random();
+    private Camera _mainCamera;
+    private System.Random _random = new System.Random();
 
-    void Start()
+    private void Start()
     {
-        mainCamera = Camera.main;
+        _mainCamera = Camera.main;
+        // if (_mainCamera == null)
+        // {
+        //     Debug.LogError("Main Camera not found. Please ensure there is a camera tagged 'MainCamera' in the scene.");
+        // }
     }
 
-    void Update()
+    private void Update()
     {
         if (Input.GetMouseButtonDown(0)) // Left mouse button
         {
@@ -23,68 +27,57 @@ public class MeteorShooter : MonoBehaviour
         }
     }
 
-    void ShootMeteor()
+    private void ShootMeteor()
     {
-        Ray ray = mainCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0)); // Center of the screen
+        Ray ray = _mainCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0)); // Center of the screen
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, maxShootDistance))
         {
-            // Check if we hit a celestial body
-            if (hit.collider.CompareTag("Celestial"))
-            {
-                GameObject targetPlanet = hit.collider.gameObject;
-                LaunchHomingMeteor(targetPlanet);
-            }
-            else
-            {
-                Debug.Log("No planet targeted. Shooting in view direction.");
-                LaunchMeteorInDirection(ray.direction);
-            }
+            GameObject target = hit.collider.CompareTag("Celestial") ? hit.collider.gameObject : null;
+            LaunchMeteor(target, ray.direction);
         }
         else
         {
             Debug.Log("No target in range. Shooting in view direction.");
-            LaunchMeteorInDirection(ray.direction);
+            LaunchMeteor(null, ray.direction);
         }
     }
 
-    void LaunchHomingMeteor(GameObject target)
-    {
-        GameObject meteor = Instantiate(GetRandomMeteorPrefab(), transform.position, Quaternion.identity);
-        HomingMeteor homingMeteor = meteor.AddComponent<HomingMeteor>();
-
-        if (homingMeteor != null)
-        {
-            homingMeteor.Initialize(target, shootingSpeed, meteorLifetime);
-        }
-        else
-        {
-            Debug.LogError("Failed to add HomingMeteor component to the meteor!");
-        }
-    }
-
-    void LaunchMeteorInDirection(Vector3 direction)
+    private void LaunchMeteor(GameObject target, Vector3 direction)
     {
         GameObject meteor = Instantiate(GetRandomMeteorPrefab(), transform.position, Quaternion.identity);
         Rigidbody meteorRb = meteor.GetComponent<Rigidbody>();
 
-        if (meteorRb != null)
+        if (meteorRb == null)
         {
-            meteorRb.AddForce(direction * shootingSpeed, ForceMode.Impulse);
-            meteorRb.useGravity = false; // Use gravity if needed, but for space, it's typically false
+            Debug.LogError("Meteor prefab must have a Rigidbody component!");
+            Destroy(meteor);
+            return;
+        }
 
-            Destroy(meteor, meteorLifetime);
+        if (target != null)
+        {
+            HomingMeteor homingMeteor = meteor.AddComponent<HomingMeteor>();
+            homingMeteor.Initialize(target, shootingSpeed, meteorLifetime);
         }
         else
         {
-            Debug.LogError("Meteor prefab must have a Rigidbody component!");
+            meteorRb.AddForce(direction * shootingSpeed, ForceMode.Impulse);
+            meteorRb.useGravity = false; // Typically false in space environments
         }
+
+        Destroy(meteor, meteorLifetime);
     }
 
-    GameObject GetRandomMeteorPrefab()
+    private GameObject GetRandomMeteorPrefab()
     {
-        int index = random.Next(meteorPrefabs.Length);
+        if (meteorPrefabs.Length == 0)
+        {
+            Debug.LogError("No meteor prefabs assigned.");
+            return null;
+        }
+        int index = _random.Next(meteorPrefabs.Length);
         return meteorPrefabs[index];
     }
 }

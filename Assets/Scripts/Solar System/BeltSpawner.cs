@@ -5,36 +5,32 @@ using UnityEngine;
 public class BeltSpawner : MonoBehaviour
 {
     [Header("Spawner Settings")]
-    public GameObject cubePrefab;
-    public int cubeDensity;
-    public int seed;
-    public float innerRadius;
-    public float outerRadius;
-    public float height;
-    public bool rotatingClockwise;
+    [SerializeField] private GameObject cubePrefab;
+    [SerializeField] private int cubeDensity;
+    [SerializeField] private int seed;
+    [SerializeField] private float innerRadius;
+    [SerializeField] private float outerRadius;
+    [SerializeField] private float height;
+    [SerializeField] private bool rotatingClockwise;
 
     [Header("Asteroid Settings")]
-    public float minOrbitSpeed;
-    public float maxOrbitSpeed;
-    public float minRotationSpeed;
-    public float maxRotationSpeed;
-    public float minSize;
-    public float maxSize;
+    [SerializeField] private float minOrbitSpeed;
+    [SerializeField] private float maxOrbitSpeed;
+    [SerializeField] private float minRotationSpeed;
+    [SerializeField] private float maxRotationSpeed;
+    [SerializeField] private float minSize;
+    [SerializeField] private float maxSize;
 
-    private Vector3 localPosition;
-    private Vector3 worldOffset;
-    private Vector3 worldPosition;
-    private float randomRadius;
-    private float randomRadian;
-    private float x;
-    private float y;
-    private float z;
+    private Vector3 _localPosition;
+    private Vector3 _worldOffset;
+    private Vector3 _worldPosition;
+    private float _randomRadius;
+    private float _randomRadian;
+    private float _x;
+    private float _y;
+    private float _z;
 
-    //================================================
-    // Random Point on a Circle given only the Angle.
-    // x = cx + r * cos(a)
-    // y = cy + r * sin(a)
-    //================================================
+    
     private void Start()
     {
         Random.InitState(seed);
@@ -43,20 +39,20 @@ public class BeltSpawner : MonoBehaviour
         {
             do
             {
-                randomRadius = Random.Range(innerRadius, outerRadius);
-                randomRadian = Random.Range(0, (2 * Mathf.PI));
+                _randomRadius = Random.Range(innerRadius, outerRadius);
+                _randomRadian = Random.Range(0, (2 * Mathf.PI));
 
-                y = Random.Range(-(height /2), (height / 2));
-                x = randomRadius * Mathf.Cos(randomRadian);
-                z = randomRadius * Mathf.Sin(randomRadian);
+                _y = Random.Range(-(height /2), (height / 2));
+                _x = _randomRadius * Mathf.Cos(_randomRadian);
+                _z = _randomRadius * Mathf.Sin(_randomRadian);
             }
-            while (float.IsNaN(z) && float.IsNaN(x));
+            while (float.IsNaN(_z) && float.IsNaN(_x));
 
-            localPosition = new Vector3(x, y, z);
-            worldOffset = transform.rotation * localPosition;
-            worldPosition = transform.position + worldOffset;
+            _localPosition = new Vector3(_x, _y, _z);
+            _worldOffset = transform.rotation * _localPosition;
+            _worldPosition = transform.position + _worldOffset;
 
-            GameObject _asteroid = Instantiate(cubePrefab, worldPosition, Quaternion.Euler(Random.Range(0, 360), Random.Range(0, 360), Random.Range(0, 360)));
+            GameObject _asteroid = Instantiate(cubePrefab, _worldPosition, Quaternion.Euler(Random.Range(0, 360), Random.Range(0, 360), Random.Range(0, 360)));
             _asteroid.AddComponent<BeltObject>().SetupBeltObject(Random.Range(minOrbitSpeed, maxOrbitSpeed), Random.Range(minRotationSpeed, maxRotationSpeed), gameObject, rotatingClockwise);
 
             // Randomize size
