@@ -21,7 +21,8 @@ public class BeltObject : MonoBehaviour
 
     private void Update()
     {
-        if(rotationClockwise)
+        // Orbit around the parent object
+        if (rotationClockwise)
         {
             transform.RotateAround(parent.transform.position, parent.transform.up, orbitSpeed * Time.deltaTime);
         }
@@ -30,6 +31,7 @@ public class BeltObject : MonoBehaviour
             transform.RotateAround(parent.transform.position, -parent.transform.up, orbitSpeed * Time.deltaTime);
         }
 
+        // Rotate the asteroid itself
         transform.Rotate(rotationDirection, rotationSpeed * Time.deltaTime);
     }
 }

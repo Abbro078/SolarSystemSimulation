@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 public class CameraFreeLook : MonoBehaviour
 {
@@ -39,8 +40,10 @@ public class CameraFreeLook : MonoBehaviour
 
     [Header("Anchored Movement"), Tooltip("By default in scene-view, this is done by right-clicking for rotation or middle mouse clicking for up and down")]
     [SerializeField] private KeyCode anchoredMoveKey = KeyCode.Mouse2;
-
     [SerializeField] private KeyCode anchoredRotateKey = KeyCode.Mouse1;
+    
+    [Header("UI Elements")]
+    [SerializeField] private TextMeshProUGUI textMeshProUGUI;
 
     private MeteorShooter MeteorShooting;
 
@@ -51,6 +54,12 @@ public class CameraFreeLook : MonoBehaviour
     {
         SavePosAndRot();
         MeteorShooting = gameObject.GetComponent<MeteorShooter>();
+
+        // Ensure the TextMeshProUGUI component's raycast target is disabled
+        if (textMeshProUGUI != null)
+        {
+            textMeshProUGUI.raycastTarget = false;
+        }
     }
 
     void Update()
@@ -202,6 +211,4 @@ public class CameraFreeLook : MonoBehaviour
             focusedObject = target.transform;
         }
     }
-
-    
 }
